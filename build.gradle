@@ -3,20 +3,11 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "maven"
 
-ext {
-    ecVersion = "0.0.7"
-}
-
 group 'xyz.epoxide.commons.libgdx'
 archivesBaseName = "EpoxideCommons-libGDX"
 version = getVersionFromJava(file("src/main/java/xyz/epoxide/commons/libgdx/Constants.java"))
 
-configurations {
-    shade
-    compile.extendsFrom shade
-}
-
-repositories {
+repositories{
     mavenLocal()
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
@@ -27,10 +18,13 @@ repositories {
 
 dependencies {
     compile "com.badlogicgames.gdx:gdx:1.9.5"
-    shade "xyz.epoxide.commons:EpoxideCommons:$ecVersion"
+    compile "xyz.epoxide.commons:EpoxideCommons:0.0.7"
 }
 
 String getVersionFromJava(File file) {
+
+    String major = "0";
+    String minor = "0";
 
     String build = System.getenv("BUILD_NUMBER") ?: "0";
     def outfile = "";
@@ -41,22 +35,19 @@ String getVersionFromJava(File file) {
 
         String v = s.trim();
         if (v.startsWith(prefix)) {
-            s = s.replaceAll("0.0.0.0\";", ext.ecVersion+".${build}\";");
+            v = v.substring(prefix.length(), v.length() - 2);
+            String[] pts = v.split("\\.");
+
+            major = pts[0];
+            minor = pts[1];
+            s = s.replaceAll(".0\";", ".${build}\";");
         }
         outfile += (s + ln);
     }
 
     file.write(outfile);
 
-    return "$ecVersion.$build";
-}
-
-jar {
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)){
-            exclude 'META-INF', 'META-INF/**'
-        }
-    }
+    return "$major.$minor.$build";
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
