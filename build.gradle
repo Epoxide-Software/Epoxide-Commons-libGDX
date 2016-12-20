@@ -12,8 +12,8 @@ archivesBaseName = "EpoxideCommons-libGDX"
 version = getVersionFromJava(file("src/main/java/xyz/epoxide/commons/libgdx/Constants.java"))
 
 configurations {
-    shaded
-    compile.extendsFrom shaded
+    shade
+    compile.extendsFrom shade
 }
 
 repositories {
@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
     compile "com.badlogicgames.gdx:gdx:1.9.5"
-    shaded "xyz.epoxide.commons:EpoxideCommons:$ecVersion"
+    shade "xyz.epoxide.commons:EpoxideCommons:$ecVersion"
 }
 
 String getVersionFromJava(File file) {
@@ -51,6 +51,14 @@ String getVersionFromJava(File file) {
     return "$ecVersion.$build";
 }
 
+jar {
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
+}
+
 task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
     classifier = 'sources'
@@ -63,15 +71,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 
 task buildJar(type: Jar) {
     from sourceSets.main.output
-
-    from {
-        configurations.shaded.collect {
-            it.isDirectory() ? it : zipTree(it).matching {
-                exclude "META-INF", "META-INF/**", "*META-INF*", "meta-inf"
-                exclude "**.jar", "**/*.jar", "*.jar"
-            }
-        }
-    }
 }
 
 artifacts {
