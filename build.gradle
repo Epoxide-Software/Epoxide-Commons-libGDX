@@ -3,22 +3,21 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "maven"
 
-group 'xyz.epoxide.commons.libgdx'
+group 'org.epoxide.commons.libgdx'
 archivesBaseName = "EpoxideCommons-libGDX"
-version = getVersionFromJava(file("src/main/java/xyz/epoxide/commons/libgdx/Constants.java"))
+version = getVersionFromJava(file("src/main/java/org/epoxide/commons/libgdx/Constants.java"))
 
 repositories{
     mavenLocal()
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-    maven { url "http://maven.epoxide.xyz" }
-
+    maven { url "http://maven.epoxide.org" }
 }
 
 dependencies {
     compile "com.badlogicgames.gdx:gdx:1.9.5"
-    compile "xyz.epoxide.commons:EpoxideCommons:0.0.7"
+    compile "org.epoxide.commons:EpoxideCommons:0.0.7"
 }
 
 String getVersionFromJava(File file) {

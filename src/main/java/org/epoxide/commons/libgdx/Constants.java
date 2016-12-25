@@ -1,4 +1,4 @@
-package xyz.epoxide.commons.libgdx;
+package org.epoxide.commons.libgdx;
 
 public class Constants {
 

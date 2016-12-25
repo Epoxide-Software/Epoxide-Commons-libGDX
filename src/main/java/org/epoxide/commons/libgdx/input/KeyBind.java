@@ -1,9 +1,9 @@
-package xyz.epoxide.commons.libgdx.input;
+package org.epoxide.commons.libgdx.input;
 
 import com.badlogic.gdx.Gdx;
-import xyz.epoxide.commons.registry.IRegisterable.Registerable;
-import xyz.epoxide.commons.registry.Identifier;
-import xyz.epoxide.commons.registry.NamedRegistry;
+import org.epoxide.commons.registry.IRegisterable.Registerable;
+import org.epoxide.commons.registry.Identifier;
+import org.epoxide.commons.registry.NamedRegistry;
 
 public class KeyBind extends Registerable<KeyBind> {
 

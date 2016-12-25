@@ -1,4 +1,4 @@
-package xyz.epoxide.commons.libgdx.input;
+package org.epoxide.commons.libgdx.input;
 
 import com.badlogic.gdx.InputAdapter;
 
