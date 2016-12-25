@@ -17,7 +17,7 @@ repositories{
 
 dependencies {
     compile "com.badlogicgames.gdx:gdx:1.9.5"
-    compile "org.epoxide.commons:EpoxideCommons:0.0.7"
+    compile "org.epoxide.commons:EpoxideCommons:0.0.10"
 }
 
 String getVersionFromJava(File file) {
