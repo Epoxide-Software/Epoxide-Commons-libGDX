@@ -36,7 +36,7 @@ public class KeyBind extends Registerable<KeyBind> {
 
     }
 
-    public void onUpdate(float delta) {
+    public void onUpdate() {
 
     }
 
