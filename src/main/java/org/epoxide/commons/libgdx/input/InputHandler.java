@@ -30,12 +30,12 @@ public class InputHandler extends InputAdapter {
         return false;
     }
 
-    public static void update(float delta) {
+    public static void update() {
         for (KeyBind key : KeyBind.REGISTRY) {
 
             if (key.isPressed()) {
 
-                key.onUpdate(delta);
+                key.onUpdate();
             }
         }
     }
